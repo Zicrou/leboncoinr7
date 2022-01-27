@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  insider_image_car: MyString
+  font_image_car: MyString
+  profile_image_car: MyString
+  marque: MyString
+  modele: MyString
+  prix: 
+  distance: 1
+  color: MyString
+  year: 2022-01-27
+
+two:
+  insider_image_car: MyString
+  font_image_car: MyString
+  profile_image_car: MyString
+  marque: MyString
+  modele: MyString
+  prix: 
+  distance: 1
+  color: MyString
+  year: 2022-01-27
