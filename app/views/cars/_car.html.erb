@@ -1,5 +1,10 @@
 <div id="<%= dom_id car %>">
   <p>
+    <strong>Posted :</strong>
+    <%= time_tag car.created_at, "data-local": "time-ago" %>
+  </p>
+
+  <p>
     <strong>Insider image car:</strong>
     <%= car.insider_image_car %>
   </p>
