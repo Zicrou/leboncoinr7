@@ -1,0 +1,5 @@
+<%= form_with model: [ car, Message.new ] do |form| %>
+    Let's talk: <br>
+    <%= form.text_area :content, size: "20x5" %>
+    <%= form.submit %>
+<% end %>

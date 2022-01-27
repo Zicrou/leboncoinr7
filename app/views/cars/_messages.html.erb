@@ -1,0 +1,8 @@
+<h2>Messages</h2>
+
+<div id="messages">
+<%# Expands to render partial: "messages/message", collection: car.messages %>
+    <%= render car.messages %>
+</div>
+
+<%= render "messages/new", car: car %>
