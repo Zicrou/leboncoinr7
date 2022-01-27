@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
     def create
         message = @car.messages.create! params.required(:message).permit(:content)
-        #MessagesMailer.submitted(message).deliver_later
+        MessagesMailer.submitted(message).deliver_later
         redirect_to @car    
     end
 
