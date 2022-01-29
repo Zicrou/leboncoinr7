@@ -6,17 +6,17 @@
 
   <p>
     <strong>Insider image car:</strong>
-    <%= image_tag car.insider_image_car %>
+    <%= image_tag car.insider_image_car if car.insider_image_car.attached? %>
   </p>
-
+ 
   <p>
-    <strong>Font image car:</strong>
-    <%= image_tag car.font_image_car %>
+    <strong>Front image car:</strong>
+    <%= image_tag car.font_image_car if car.font_image_car.attached? %>
   </p>
 
   <p>
     <strong>Profile image car:</strong>
-    <%= image_tag car.profile_image_car %>
+    <%= image_tag car.profile_image_car if car.profile_image_car.attached? %>
   </p>
 
   <p>
