@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_29_043613) do
+ActiveRecord::Schema.define(version: 2022_01_29_110747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2022_01_29_043613) do
     t.string "profile_image_car"
     t.string "marque"
     t.string "modele"
-    t.bigint "prix"
+    t.bigint "price"
     t.integer "distance"
     t.string "color"
     t.date "year"

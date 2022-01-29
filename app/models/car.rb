@@ -22,6 +22,16 @@ class Car < ApplicationRecord
         where(modele_id: id)
     end
 
+    # Researcch by Max Price
+    def self.search_by_max_price(max_price)
+        where(price > max_price)
+    end
+
+    # Researcch by Min Price
+    def self.search_by_max_price(min_price)
+        where(price > min_price)
+    end
+
     # Researcch by Marque & Modele
     def self.search_by_marque_modele(id_marque, id_modele)
         where(marque_id: id_marque, modele_id: id_modele)

@@ -65,22 +65,32 @@ class CarsController < ApplicationController
     #puts "Max Price: " +@max_price
     #puts "Min Price: " +@min_price
     #puts "Color " +@color
+    
+    # Research by nothing when everything is empty
     if @marque.empty? and @modele.empty? and @max_price and @min_price
       @cars = Car.all
+    # Research by Marque
     elsif !@marque.empty? and @modele.empty? and @max_price and @min_price
       @cars = Car.search_by_marque(@marque)
+    # Research by Modele
     elsif @marque.empty? and !@modele.empty? and @max_price and @min_price
       @cars = Car.search_by_modele(@modele)   
+    # Research by Max Price
     elsif @marque.empty? and @modele.empty? and !@max_price and @min_price
       #@cars = Car.search_by_marque_modele(@marque, @modele)
+    # Research by Min Price
     elsif @marque.empty? and @modele.empty? and @max_price and !@min_price
       #@cars = Car.search_by_marque_modele(@marque, @modele)
+    # Research by Marque AND Modele
     elsif !@marque.empty? and !@modele.empty? and @max_price and @min_price
       @cars = Car.search_by_marque_modele(@marque, @modele)
+    # Research by Marque AND Modele AND MaxPrice
     elsif !@marque.empty? and !@modele.empty? and !@max_price and @min_price
       #@cars = Car.search_by_marque_modele(@marque, @modele)
+    # Research by Marque AND Modele AND MinPrice
     elsif !@marque.empty? and !@modele.empty? and @max_price and !@min_price
       #@cars = Car.search_by_marque_modele(@marque, @modele)
+    # Research by Marque AND Modele AND MAxPrice AND MinPrice
     elsif !@marque.empty? and !@modele.empty? and !@max_price and !@min_price
       #@cars = Car.search_by_marque_modele(@marque, @modele)
     end
@@ -95,7 +105,7 @@ class CarsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def car_params
-      params.require(:car).permit(:marque_id, :modele_id, :prix, :insider_image_car, :font_image_car, :profile_image_car, :distance, :description, :color, :year)
+      params.require(:car).permit(:marque_id, :modele_id, :price, :insider_image_car, :font_image_car, :profile_image_car, :distance, :description, :color, :year)
     end
 
     # Custom trusted parameter for research
