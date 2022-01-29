@@ -57,6 +57,36 @@ class CarsController < ApplicationController
     end
   end
 
+  def research
+    @marque = research_params.fetch(:marque_id)
+    @modele = research_params.fetch(:modele_id)
+    @max_price = research_params.fetch(:max_price)
+    @min_price = research_params.fetch(:min_price)
+    #puts "Max Price: " +@max_price
+    #puts "Min Price: " +@min_price
+    #puts "Color " +@color
+    if @marque.empty? and @modele.empty? and @max_price and @min_price
+      @cars = Car.all
+    elsif !@marque.empty? and @modele.empty? and @max_price and @min_price
+      @cars = Car.search_by_marque(@marque)
+    elsif @marque.empty? and !@modele.empty? and @max_price and @min_price
+      @cars = Car.search_by_modele(@modele)   
+    elsif @marque.empty? and @modele.empty? and !@max_price and @min_price
+      #@cars = Car.search_by_marque_modele(@marque, @modele)
+    elsif @marque.empty? and @modele.empty? and @max_price and !@min_price
+      #@cars = Car.search_by_marque_modele(@marque, @modele)
+    elsif !@marque.empty? and !@modele.empty? and @max_price and @min_price
+      @cars = Car.search_by_marque_modele(@marque, @modele)
+    elsif !@marque.empty? and !@modele.empty? and !@max_price and @min_price
+      #@cars = Car.search_by_marque_modele(@marque, @modele)
+    elsif !@marque.empty? and !@modele.empty? and @max_price and !@min_price
+      #@cars = Car.search_by_marque_modele(@marque, @modele)
+    elsif !@marque.empty? and !@modele.empty? and !@max_price and !@min_price
+      #@cars = Car.search_by_marque_modele(@marque, @modele)
+    end
+    render :index
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car
@@ -65,6 +95,11 @@ class CarsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def car_params
-      params.require(:car).permit(:marque, :modele, :prix, :insider_image_car, :font_image_car, :profile_image_car, :distance, :description, :color, :year)
+      params.require(:car).permit(:marque_id, :modele_id, :prix, :insider_image_car, :font_image_car, :profile_image_car, :distance, :description, :color, :year)
+    end
+
+    # Custom trusted parameter for research
+    def research_params
+      params.require(:car).permit(:marque_id, :modele_id, :max_price, :min_price)
     end
 end

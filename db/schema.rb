@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_033845) do
+ActiveRecord::Schema.define(version: 2022_01_29_043613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 2022_01_27_033845) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+    t.bigint "marque_id"
+    t.bigint "modele_id"
+    t.index ["marque_id"], name: "index_cars_on_marque_id"
+    t.index ["modele_id"], name: "index_cars_on_modele_id"
+  end
+
+  create_table "marques", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -76,7 +86,18 @@ ActiveRecord::Schema.define(version: 2022_01_27_033845) do
     t.index ["car_id"], name: "index_messages_on_car_id"
   end
 
+  create_table "modeles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "marque_id", null: false
+    t.index ["marque_id"], name: "index_modeles_on_marque_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cars", "marques"
+  add_foreign_key "cars", "modeles"
   add_foreign_key "messages", "cars"
+  add_foreign_key "modeles", "marques"
 end

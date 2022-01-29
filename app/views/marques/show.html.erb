@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @marque %>
+
+<div>
+  <%= link_to "Edit this marque", edit_marque_path(@marque) %> |
+  <%= link_to "Back to marques", marques_path %>
+
+  <%= button_to "Destroy this marque", @marque, method: :delete %>
+</div>

@@ -28,12 +28,24 @@
 
   <div>
     <%= form.label :marque, style: "display: block" %>
-    <%= form.text_field :marque %>
+    <%= form.collection_select(:marque_id, Marque.order(:name), :id, :name,
+      {
+        include_blank: true
+      },
+      onchange: '',
+      class:""
+    ) %>
   </div>
 
   <div>
     <%= form.label :modele, style: "display: block" %>
-    <%= form.text_field :modele %>
+    <%= form.collection_select(:modele_id, Modele.order(:name), :id, :name,
+      {
+        include_blank: true
+      },
+      onchange: '',
+      class:""
+    ) %>
   </div>
 
   <div>
