@@ -62,9 +62,7 @@ class CarsController < ApplicationController
     @modele = research_params.fetch(:modele_id)
     @max_price = research_params.fetch(:max_price)
     @min_price = research_params.fetch(:min_price)
-    #puts "Max Price: " +@max_price
-    #puts "Min Price: " +@min_price
-    #puts "Color " +@color
+    
     
     # Research by nothing when everything is empty
     if @marque.empty? and @modele.empty? and @max_price and @min_price
@@ -77,22 +75,37 @@ class CarsController < ApplicationController
       @cars = Car.search_by_modele(@modele)   
     # Research by Max Price
     elsif @marque.empty? and @modele.empty? and !@max_price and @min_price
-      #@cars = Car.search_by_marque_modele(@marque, @modele)
+      @cars = Car.search_by_max_price(@max_price)
     # Research by Min Price
     elsif @marque.empty? and @modele.empty? and @max_price and !@min_price
-      #@cars = Car.search_by_marque_modele(@marque, @modele)
+      @cars = Car.search_by_min_price(@min_price)
     # Research by Marque AND Modele
     elsif !@marque.empty? and !@modele.empty? and @max_price and @min_price
       @cars = Car.search_by_marque_modele(@marque, @modele)
+    # Research by Marque AND MaxPrice
+    elsif !@marque.empty? and @modele.empty? and !@max_price and @min_price
+      @cars = Car.search_by_marque_max_price(@marque, @max_price)
+    # Research by Marque AND MinPrice
+    elsif !@marque.empty? and @modele.empty? and @max_price and !@min_price
+      @cars = Car.search_by_marque_min_price(@marque, @min_price)
+    # Research by Modele AND MaxPrice
+    elsif @marque.empty? and !@modele.empty? and !@max_price and @min_price
+    @cars = Car.search_by_modele_max_price(@modele, @max_price)
+    # Research by Modele AND MinPrice
+    elsif @marque.empty? and !@modele.empty? and @max_price and !@min_price
+      @cars = Car.search_by_modele_min_price(@modele, @min_price)
+    # Research by MaxPrice AND MinPrice
+    elsif @marque.empty? and @modele.empty? and !@max_price and !@min_price
+      @cars = Car.search_by_max_price_min_price(@max_price, @min_price)
     # Research by Marque AND Modele AND MaxPrice
     elsif !@marque.empty? and !@modele.empty? and !@max_price and @min_price
-      #@cars = Car.search_by_marque_modele(@marque, @modele)
+      @cars = Car.search_by_marque_modele_max_price(@marque, @modele, @max_price)
     # Research by Marque AND Modele AND MinPrice
     elsif !@marque.empty? and !@modele.empty? and @max_price and !@min_price
-      #@cars = Car.search_by_marque_modele(@marque, @modele)
+      @cars = Car.search_by_marque_modele_min_price(@marque, @modele, @min_price)
     # Research by Marque AND Modele AND MAxPrice AND MinPrice
     elsif !@marque.empty? and !@modele.empty? and !@max_price and !@min_price
-      #@cars = Car.search_by_marque_modele(@marque, @modele)
+      @cars = Car.search_by_marque_modele_max_and_min_price(@marque, @modele, @max_price, @min_price)
     end
     render :index
   end

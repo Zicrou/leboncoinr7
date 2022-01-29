@@ -12,28 +12,68 @@ class Car < ApplicationRecord
     has_one_attached :font_image_car
     has_one_attached :profile_image_car
 
-    # Researcch by Marque
-    def self.search_by_marque(id)
-        where(marque_id: id)
+    # Research by Marque
+    def self.search_by_marque(marque)
+        where(marque_id: marque)
     end
     
-    # Researcch by Modele
-    def self.search_by_modele(id)
-        where(modele_id: id)
+    # Research by Modele
+    def self.search_by_modele(modele)
+        where(modele_id: modele)
     end
 
-    # Researcch by Max Price
+    # Research by Max Price
     def self.search_by_max_price(max_price)
-        where(price > max_price)
+        where("price <= ?", max_price)
     end
 
-    # Researcch by Min Price
-    def self.search_by_max_price(min_price)
-        where(price > min_price)
+    # Research by Min Price
+    def self.search_by_min_price(min_price)
+        where("price >= ?", min_price)
     end
 
-    # Researcch by Marque & Modele
-    def self.search_by_marque_modele(id_marque, id_modele)
-        where(marque_id: id_marque, modele_id: id_modele)
+    # Research by Marque & Modele
+    def self.search_by_marque_modele(marque, modele)
+        where(marque_id: marque, modele_id: modele)
+    end
+
+    # Research by Marque & Max Price
+    def self.search_by_marque_max_price(marque, max_price)
+        where(marque_id: marque).where("price <= ?", max_price)
+    end
+
+    # Research by Marque & Min Price
+    def self.search_by_marque_min_price(marque, min_price)
+        where(marque_id: marque).where("price >= ?", min_price)
+    end
+
+    # Research by Modele & Max Price
+    def self.search_by_modele_max_price(modele, max_price)
+        where(modele_id: modele).where("price <= ?", max_price)
+    end
+
+    # Research by Modele & Min Price
+    def self.search_by_modele_min_price(modele, min_price)
+        where(modele_id: modele).where("price >= ?", min_price)
+    end
+
+    # Research by Max Price & Min Price
+    def self.search_by_max_price_min_price(max_price, min_price)
+        where("price <= ?", max_price).where("price >= ?", min_price)
+    end
+
+    # Research by Marque, Modele AND Max Price
+    def self.search_by_marque_modele_max_price(marque, modele, max_price)
+        where(marque_id: marque).where(modele_id: modele).where("price <= ?", max_price)
+    end
+
+    # Research by Marque, Modele AND Min Price
+    def self.search_by_marque_modele_min_price(marque, modele, min_price)
+        where(marque_id: marque).where(modele_id: modele).where("price >= ?", min_price)
+    end
+
+    # Research by Marque AND Modele AND MAxPrice AND MinPrice
+    def self.search_by_marque_modele_max_and_min_price(marque, modele, max_price, min_price)
+        where(marque_id: marque).where(modele_id: modele).where("price <= ?", max_price).where("price >= ?", min_price)
     end
 end
