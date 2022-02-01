@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     collection do
       get :research
     end
+    collection do
+      get :filter
+    end
   end
   get 'page/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

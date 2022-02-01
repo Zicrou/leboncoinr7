@@ -4,6 +4,7 @@ class CarsController < ApplicationController
   # GET /cars or /cars.json
   def index
     @cars = Car.all
+    @modeles = Modele.all
   end
 
   # GET /cars/1 or /cars/1.json
@@ -13,10 +14,12 @@ class CarsController < ApplicationController
   # GET /cars/new
   def new
     @car = Car.new
+    @modeles = Modele.all
   end
 
   # GET /cars/1/edit
   def edit
+    @modeles = Modele.all
   end
 
   # POST /cars or /cars.json
@@ -55,6 +58,20 @@ class CarsController < ApplicationController
       format.html { redirect_to cars_url, notice: "Car was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def filter
+    @marque = params[:marqueId]
+    #@domaine = params[:domaineId]
+    if !@marque.nil?
+      @modeles = Modele.where(marque_id: @marque)
+      puts "marque= "+ @marque
+      respond_to do |format|
+        format.json { render json: @modeles }
+      end
+    end
+    #render :index
+    
   end
 
   def research
@@ -107,6 +124,7 @@ class CarsController < ApplicationController
     elsif !@marque.empty? and !@modele.empty? and !@max_price and !@min_price
       @cars = Car.search_by_marque_modele_max_and_min_price(@marque, @modele, @max_price, @min_price)
     end
+    @modeles = Modele.all
     render :index
   end
 

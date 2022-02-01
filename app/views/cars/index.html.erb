@@ -10,12 +10,12 @@
           {
             include_blank: true
           },
-          onchange: '',
+          onchange: 'getIdMarque()',
           class:"form-select mb-3"
       ) %>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 modeles" data-modeles="<%= @modeles.to_json %>">
       <%= form.label :modele_id %>
       <%= form.collection_select(:modele_id, Modele.order(:name), :id, :name,
           {
